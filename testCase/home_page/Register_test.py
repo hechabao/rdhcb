@@ -7,12 +7,12 @@ from func.read_CSV import read
 from page_object.test_register_Page import test_Register_Page
 from func.log import Logger
 
-class TestRegException(MyTestCase):
+class TestLoginPage(MyTestCase):
     """登录页面测试
 
     :return:
     """
-    def test_zheng(self):
+    def test_normal_login(self):
         """正常登录
 
         :return:
@@ -34,6 +34,7 @@ class TestRegException(MyTestCase):
         except :
             Get_Screenshot(self.driver, '登录失败')
             raise
+
     def test_zhanhaocuowu_tishi(self):
         """错误账号登录
 

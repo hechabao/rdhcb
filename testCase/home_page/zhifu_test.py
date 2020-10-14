@@ -1,7 +1,7 @@
 from ddt import ddt,data,unpack,file_data
 import unittest2
 from time import sleep
-from func.qingqiuyijian import weishu_shengchenqi
+from func.feedback_method import weishu_shengchenqi
 from func.get_screenshot import Get_Screenshot
 from base.myTestCase import MyTestCase
 from page_object.test_register_Page import test_Register_Page

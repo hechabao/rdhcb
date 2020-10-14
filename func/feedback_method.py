@@ -17,22 +17,12 @@ def huoqu(ns,m):
         "Cookie": "JSESSIONID=1C8539F81D2CE69F82FF20DADA3464C7",
         "Upgrade-Insecure-Requests": "1"
     }
-
     html = requests.get(url,headers=headers).content.decode('utf-8','ignore')
-
     n = re.findall(r"\{(.*?)\}",str(re.findall(r".*?data : \[(.*?)]",html)))
-
-
-    # for i in n[0].split(','):
-    #     print(i)
     list = []
     for i in n:
-        # print(i)
         maaaa = json.loads(("{"+i+"}").replace('\\xa0',' '))
-        # print(i)
         list.append(maaaa)
-
-        # print(maaaa)
 
     if ns == '新增功能需求':
         ns = m

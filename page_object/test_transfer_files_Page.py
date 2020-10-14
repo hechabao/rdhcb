@@ -3,7 +3,7 @@
 
 from selenium.webdriver.common.by import By
 import time
-from func.xiaobaogao import baogao
+from func.verification_result_method import baogao
 from func.log import Logger
 # import re
 import os
