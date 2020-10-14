@@ -18,6 +18,7 @@ class TestRegException(MyTestCase):
         :return:
         """
         mylogger = Logger(logger='正常登录').getlog()
+        print('111')
         rp = test_Register_Page(self.driver)
         rp.open()#打开
         mylogger.info("打开浏览器")
