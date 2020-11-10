@@ -118,32 +118,69 @@ import json
 # print("开始")
 # r = requests.post(url,headers=headers).content.decode("utf-8","ignore")
 # print(r)
-from selenium import webdriver
-from bs4 import BeautifulSoup
-import requests
+# from selenium import webdriver
+# from bs4 import BeautifulSoup
+# import requests
+# import time
+# import re
+#
+# urllll = "https://www.baidu.com"
+# driver = webdriver.Chrome()
+# driver.get(urllll)
+# time.sleep(1)
+# ht = driver.page_source
+# # print(ht)
+# print('11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111')
+# soup = BeautifulSoup(ht,"html.parser")
+# # print(soup)
+# # a = soup.find_all('a')
+# # print(a)
+# for tag in soup.find_all(True):
+#     print(tag.name)
+#
+# list = []
+# for i in range(0,6):
+#     if i == 0 or i == 1:
+#         list.append(i*2)
+#     else:
+#         a = 2
+#         for j in range(i-1):
+#             a = a*2
+#         list.append(a)
+# print(list)
+# -*- coding: utf-8 -*-
+# import dingtalk.api
+#
+# req=dingtalk.api.OapiGettokenRequest("https://oapi.dingtalk.com/gettoken")
+#
+# try:
+# 	resp= req.getResponse(access_token)
+# 	print(resp)
+# except e:
+# 	print(e)
+# import json
+# import requests
+# data = {"token":"26e07460e9de407394b77e331e59e394","userId":1,"data":{"id":36},"projectId":36,"loginType":"web"}
+# headers = {
+# "Content-Type": "application/json;charset=utf-8"
+# }
+# a = requests.post(url="http://192.168.6.230:212/info/project/getProjectInfo",data=json.dumps(data),headers=headers).content.decode('utf-8', 'ignore')
+# print(a)
+
+from selenium.webdriver.common.by import By
 import time
 import re
+import os
+import selenium
+from base.basePage import BasePage
 
-urllll = "https://www.baidu.com"
-driver = webdriver.Chrome()
-driver.get(urllll)
-time.sleep(1)
-ht = driver.page_source
-# print(ht)
-print('11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111')
-soup = BeautifulSoup(ht,"html.parser")
-# print(soup)
-# a = soup.find_all('a')
-# print(a)
-for tag in soup.find_all(True):
-    print(tag.name)
+class test_XXXXXXXXX(BasePage):
+    #元素定位
+    username_input_loc = (By.CLASS_NAME, 'el-input__inner')
 
-
-
-
-
-
-
+    # 操作的方法
+    def input_username(self,username):
+        self.driver.find_element(*self.username_input_loc).send_keys(username)
 
 
 

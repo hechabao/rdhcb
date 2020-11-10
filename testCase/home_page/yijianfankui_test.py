@@ -1,7 +1,7 @@
-from ddt import ddt,data,unpack,file_data
+from ddt import ddt, data, unpack, file_data
 import unittest2
 from time import sleep
-from func.feedback_method import weishu_shengchenqi,huoqu
+from func.feedback_method import weishu_shengchenqi, huoqu
 from func.get_screenshot import Get_Screenshot
 from base.myTestCase import MyTestCase
 from page_object.test_register_Page import test_Register_Page
@@ -14,31 +14,37 @@ wei_shu_xian_zhi = read('yijian-weishuxianzhi.csv')
 hui_xian_zhanghao = read('yijian-huixianzhanghao.csv')
 bi_tian_xiang = read('yijian-bitianxiang.csv')
 xuan_ze_kuang_ceshi = read('yijian-xuan_ze_kuang_ceshi.csv')
+
+
 @ddt
 class testyonghu(MyTestCase):
     @data(*wei_shu_xian_zhi)
     @unpack
-    def test_weishuxianzhi(self,name,zhanghao,mima,name1,name2,name3,name4,name5,yuqi,shibai,shuju,shurkuang,zhanghaoleix):
+    def test_weishuxianzhi(self, name, zhanghao, mima, name1, name2, name3, name4, name5, yuqi, shibai, shuju,
+                           shurkuang, zhanghaoleix):
         """%s
 
         :return:
-        """%name
+        """ % name
         mylogger = Logger(logger=name).getlog()
         mylogger.info(name1)
-        test_Register_Page(self.driver).login(zhanghao,mima)
+        test_Register_Page(self.driver).login(zhanghao, mima)
         mylogger.info(name2)
         yijianss_tests(self.driver).user_jinglai()
         mylogger.info(name3)
-        yijianss_tests(self.driver).panduanweizhi(weishu_shengchenqi(int(shuju)),shurkuang,'输入',zhanghaoleix)
+        yijianss_tests(self.driver).panduanweizhi(weishu_shengchenqi(int(shuju)), shurkuang, '输入', zhanghaoleix)
         mylogger.info(name4)
-        print(len(yijianss_tests(self.driver).panduanweizhi(int(shuju),shurkuang,'获取',zhanghaoleix)), yijianss_tests(self.driver).tishi())
+        print(len(yijianss_tests(self.driver).panduanweizhi(int(shuju), shurkuang, '获取', zhanghaoleix)),
+              yijianss_tests(self.driver).tishi())
         try:
             self.assertEqual(yijianss_tests(self.driver).tishi(), yuqi, msg='不提示位数限制')
             mylogger.info('提示验证成功')
             mylogger.info(name5)
             try:
 
-                self.assertEqual(len(yijianss_tests(self.driver).panduanweizhi(int(shuju),shurkuang,'获取',zhanghaoleix)), (int(shuju)-1), msg='数据验证失败')
+                self.assertEqual(
+                    len(yijianss_tests(self.driver).panduanweizhi(int(shuju), shurkuang, '获取', zhanghaoleix)),
+                    (int(shuju) - 1), msg='数据验证失败')
                 mylogger.info('数据验证成功')
             except:
                 shibai = '数据保存失败'
@@ -50,7 +56,8 @@ class testyonghu(MyTestCase):
 
     @data(*hui_xian_zhanghao)
     @unpack
-    def test_zhanghaohuixian(self,name,zhanghao,mima,name1,name2,name3,yuqi,cuowu,shuju,shurkuang,zhanghaoleix):
+    def test_zhanghaohuixian(self, name, zhanghao, mima, name1, name2, name3, yuqi, cuowu, shuju, shurkuang,
+                             zhanghaoleix):
         """%s
 
         :return:
@@ -62,7 +69,8 @@ class testyonghu(MyTestCase):
         yijianss_tests(self.driver).user_jinglai()
         mylogger.info(name3)
         try:
-            self.assertEqual(yijianss_tests(self.driver).panduanweizhi(shuju, shurkuang, '获取', zhanghaoleix), zhanghao, msg=cuowu)
+            self.assertEqual(yijianss_tests(self.driver).panduanweizhi(shuju, shurkuang, '获取', zhanghaoleix), zhanghao,
+                             msg=cuowu)
             mylogger.info('回显成功')
         except:
             mylogger.info(cuowu)
@@ -71,7 +79,8 @@ class testyonghu(MyTestCase):
 
     @data(*bi_tian_xiang)
     @unpack
-    def test_bitianxiangtishi(self,name,zhanghao,mima,name1,name2,name3,name4,yanzheng,shuru,yuqi,cuowu,shurkuang,zhanghaoleix):
+    def test_bitianxiangtishi(self, name, zhanghao, mima, name1, name2, name3, name4, yanzheng, shuru, yuqi, cuowu,
+                              shurkuang, zhanghaoleix):
         """%s
 
         :return:
@@ -97,7 +106,8 @@ class testyonghu(MyTestCase):
 
     @data(*xuan_ze_kuang_ceshi)
     @unpack
-    def test_bitianxiangtishi(self,name,zhanghao,mima,name1,name2,name3,name4,name5,name6,name7,yuqi,cuowu,shuju,leix,zhanghaolx):
+    def test_bitianxiangtishi(self, name, zhanghao, mima, name1, name2, name3, name4, name5, name6, name7, yuqi, cuowu,
+                              shuju, leix, zhanghaolx):
         """%s
 
         :return:
@@ -112,7 +122,7 @@ class testyonghu(MyTestCase):
         yijianss_tests(self.driver).panduanweizhi('哇哇哇', '机构名称', '输入', zhanghaolx)
         yijianss_tests(self.driver).panduanweizhi('哇哇哇', '联系人', '输入', zhanghaolx)
         mylogger.info(name4)
-        yijianss_tests(self.driver).panduanweizhi(shuju,leix,'无','无')
+        yijianss_tests(self.driver).panduanweizhi(shuju, leix, '无', '无')
         sleep(5)
         mylogger.info(name5)
 
@@ -125,8 +135,8 @@ class testyonghu(MyTestCase):
 
             try:
                 mylogger.info(name7)
-                print(huoqu(leix,shuju),shuju)
-                self.assertEqual(huoqu(leix,shuju), shuju ,msg='数据核实失败')
+                print(huoqu(leix, shuju), shuju)
+                self.assertEqual(huoqu(leix, shuju), shuju, msg='数据核实失败')
                 mylogger.info('数据验证成功')
             except:
                 cuowu = '数据保存失败'
@@ -156,5 +166,7 @@ class testyonghu(MyTestCase):
         except:
             Get_Screenshot(self.driver, '用户信息修改页不能退出首页')
             raise
+
+
 if __name__ == '__main__':
     unittest2.main()
