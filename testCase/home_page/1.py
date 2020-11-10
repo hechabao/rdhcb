@@ -10,34 +10,73 @@
 #news-list-body
 # driver = webdriver.Chrome()
 # driver.get('https://www.baidu.com')
-import requests
-import re
-import ast
-import json
-url = "http://182.92.2.252:8010/crm/feedbacks/list"
-headers={"Host": "182.92.2.252:8010",
-    "User-Agent": "Mozilla/5.0(Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0",
-    "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
-    "Accept-Encoding": "gzip, deflate",
-    "Referer": "http://182.92.2.252:8010/crm/user/userManager",
-    "Connection": "keep-alive",
-    "Cookie": "JSESSIONID=D2CE5E0EE6423B47205A069584296590",
-    "Upgrade-Insecure-Requests": "1"
+# import requests
+# import re
+# import ast
+# import json
+# url = "http://182.92.2.252:8010/crm/feedbacks/list"
+# headers={"Host": "182.92.2.252:8010",
+#     "User-Agent": "Mozilla/5.0(Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0",
+#     "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+#     "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
+#     "Accept-Encoding": "gzip, deflate",
+#     "Referer": "http://182.92.2.252:8010/crm/user/userManager",
+#     "Connection": "keep-alive",
+#     "Cookie": "JSESSIONID=D2CE5E0EE6423B47205A069584296590",
+#     "Upgrade-Insecure-Requests": "1"
+# }
+#
+# html = requests.get(url,headers=headers).content.decode('utf-8','ignore')
+# print(html)
+# n = re.findall(r"\{(.*?)\}",str(re.findall(r".*?data : \[(.*?)]",html)))
+#
+#
+# # for i in n[0].split(','):
+# #     print(i)vvv
+# list = []
+# for i in n:
+#     # print(i)
+#     maaaa = json.loads(("{"+i+"}").replace('\\xa0',' '))
+#     # print(i)
+#     list.append(maaaa)
+#
+#     print(maaaa)
+#coding:utf-8   #字符集编码设置成UTF-8
+  #发送post请求
+
+import time
+import hmac
+import hashlib
+import base64
+import urllib.parse
+# 17600446278
+timestamp = str(round(time.time() * 1000))
+secret = 'SEC25644221f3356cbc3ba949f64f46a89a86ac7d31a500701fa407993a737aad2f'
+secret_enc = secret.encode('utf-8')
+string_to_sign = '{}\n{}'.format(timestamp, secret)
+string_to_sign_enc = string_to_sign.encode('utf-8')
+hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+print(timestamp)
+print(sign)
+import requests,json   #导入依赖库
+headers={'Content-Type': 'application/json'}   #定义数据类型
+webhook = 'https://oapi.dingtalk.com/robot/send?access_token=748ba163ab0d433093471b8cffbf9052c8fa519bcc6543f891b99c08044b72bb&timestamp=%s&sign=%s'%(timestamp,sign)  #定义webhook，从钉钉群机器人设置页面复制获得
+#定义要发送的数据+86-13051296614+86-15600599039+86-17600446278
+# 高尚13051296614
+# 海15600599039
+# 成龙17600446278
+
+
+mobile = "13051296614"
+data = {
+    "msgtype": "text",
+    "text": {"content": '晚上来成龙家咱们玩不要做挑战' },
+    "at": {"atMobiles": "['']","isAtAll": True}
 }
+a = requests.post(url=webhook, data=json.dumps(data), headers=headers)
+print(a)
+data1 = {
 
-html = requests.get(url,headers=headers).content.decode('utf-8','ignore')
-print(html)
-n = re.findall(r"\{(.*?)\}",str(re.findall(r".*?data : \[(.*?)]",html)))
-
-
-# for i in n[0].split(','):
-#     print(i)vvv
-list = []
-for i in n:
-    # print(i)
-    maaaa = json.loads(("{"+i+"}").replace('\\xa0',' '))
-    # print(i)
-    list.append(maaaa)
-
-    print(maaaa)
+}
+# https://oapi.dingtalk.com/topapi/robot/org/intelligent/message/send

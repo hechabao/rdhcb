@@ -4,50 +4,44 @@ import re
 import os
 import selenium
 from base.basePage import BasePage
-'''
-//i[@class='close el-icon-circle-close']
-
-
-'''
 #登录
 class test_Register_Page(BasePage):
-    baocuo_xingxi_loc = (By.CLASS_NAME, "el-message__content")
-    username_input_loc = (By.CLASS_NAME, 'el-input__inner')
-    password_input_loc = (By.XPATH, "//input[@placeholder='请输入密码']")
+    # 元素定位div#app>div>div:nth-of-type(3)>div>span
+    baocuo_xingxi_loc = (By.CLASS_NAME, "el-message__content")# 提示框获取
+    username_input_loc = (By.CLASS_NAME, 'el-input__inner')# 账号输入框
+    password_input_loc = (By.XPATH, "//input[@placeholder='请输入密码']")# 密码输入框
     baiwen_input_loc = (By.CLASS_NAME, 'el-progress__text')
-    login_btu_loc = (By.XPATH,
-                     "/html/body/div[@id='app']/div[@class='login']/div[@class='clearfix login-box']/div[@class='login-cont']/span")
-    shangchuan_loc = (By.XPATH, (
-        "/html/body/div[@id='app']/div[@id='home']/div[@class='content']/div[@class='main source']/div[@class='main-create flex-row']/div[@class='main-create-upload']/div[@class='content']/div[@class='center']/div[@class='upload flex-row3']/div[@class='elUpload flex1']/div[@class='upload-demo flex-col']/div[@class='el-upload el-upload--text']/div[@class='el-upload-dragger']"))
-    url = '/projectManager/index#/'
-    guanggao_guanbi = (By.XPATH,("//i[@class='close el-icon-circle-close']"))
-    baocuo = (By.XPATH, "//div[contains(@class,'el-inp el-input')]/following-sibling::p[1]")
-    yxz= (By.LINK_TEXT,"云协作")
-    erlang = (By.LINK_TEXT, "二郎神")
-    yonghuzuce=(By.XPATH,"//div[text()='忘记密码?']")
-    wangjimimas=(By.XPATH,"//div[text()='用户注册']")
-    shenji_baduan_zhidao_anniu = (By.XPATH,"//span[text()[normalize-space()='我知道了']]")
+    url = '/projectManager/index#/'#地址
+    baocuo = (By.XPATH, "//div[contains(@class,'el-inp el-input')]/following-sibling::p[1]")#输入框提示
+    yxz= (By.LINK_TEXT,"云协作")#云协作跳转按钮
+    erlang = (By.LINK_TEXT, "二郎神")#二郎神跳转按钮
+    yonghuzuce=(By.XPATH,"//div[text()='忘记密码?']")#忘记密码按钮
+    wangjimimas=(By.XPATH,"//div[text()='用户注册']")#用户注册按钮
+    shenji_baduan_zhidao_anniu = (By.XPATH,"//span[text()[normalize-space()='我知道了']]")#活动提示框等待5秒后的我知道了按钮
+    login_btu_loc = (By.CSS_SELECTOR,"div#app>div>div:nth-of-type(3)>div>span")
+    # 打开页面
     def open(self):
         self.url = self.base_url + self.url
         self.driver.get(self.url)
 
-
+    # 账号输入框
     def input_username(self,username):
         time.sleep(1)
         self.driver.find_element(*self.username_input_loc).send_keys(username)
         # self.driver.find_element()
 
+    # 密码输入框
     def input_password(self,password):
         self.driver.find_element(*self.password_input_loc).send_keys(password)
 
+    # 点击登录
     def click_login_bth(self):
         time.sleep(1)
         self.driver.find_element(*self.login_btu_loc).click()
         time.sleep(1)
-        # time.sleep(3)
-        # self.driver.find_element(*self.guanggao_guanbi).click()
-        # time.sleep(1)
-        return 1
+
+
+    # 提示框获取
     def tishi(self):
         while True:
             try:
@@ -57,12 +51,13 @@ class test_Register_Page(BasePage):
             except:
                 print('没有')
 
+    #输入框提示
     def click_shangcuan_bth(self):
         time.sleep(1)
         n = self.driver.find_element(*self.baocuo).text
         return n
-        # print(n)
-        # print('......................')
+
+    #升级通告时点击知道按钮
     def shengji_panduan(self):
         try:
             time.sleep(5)
@@ -70,6 +65,8 @@ class test_Register_Page(BasePage):
             time.sleep(1)
         except:
             print('失败')
+
+    #登录操作集
     def login(self,username,password):
         self.open()
         self.input_username(username)
@@ -77,15 +74,23 @@ class test_Register_Page(BasePage):
         self.click_login_bth()
         # self.shengji_panduan()#升级通告时点击知道按钮
         # return self.driver
+
+    #点击云协作按钮获取跳转链接
     def yunxiezuo(self):
         self.driver.find_element(*self.yxz).click()
         return self.driver.current_url
+
+    #点击二郎神按钮获取跳转链接
     def erlangshen(self):
         self.driver.find_element(*self.erlang).click()
         return self.driver.current_url
+
+    #点击用户注册按钮获取跳转链接
     def wangjimima(self):
         self.driver.find_element(*self.yonghuzuce).click()
         return self.driver.current_url
+
+    #点击忘记密码按钮获取跳转链接
     def yonghuzhuce(self):
         time.sleep(1)
         self.driver.find_element(*self.wangjimimas).click()

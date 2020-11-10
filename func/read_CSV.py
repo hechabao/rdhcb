@@ -13,7 +13,8 @@ def read(filename):
     list=[]
     with open(r'%s'%path, encoding='UTF-8') as content:
         data = csv.reader(content)
-
+        print('1111111111111111111111')
+        print(data)
         for row in data:
             # if row:
             list.append(row)

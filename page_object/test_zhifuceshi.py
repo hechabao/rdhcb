@@ -202,6 +202,7 @@ class zhifu_tests(BasePage):
 
     def fanhui_pn(self,neirong):
         namesss = "//input[@placeholder='%s']"%neirong
+        self.driver.find_URL_elements()
         # print(namesss)
         return namesss
 

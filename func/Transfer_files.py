@@ -34,3 +34,5 @@ def wenjianlujin():
 # #
 # a = wenjianlujin()
 # print(a)
+for i in wenjianlujin():
+    print(i)
