@@ -32,6 +32,7 @@ class TestLoginPage(MyTestCase):
         mylogger.info("点击登录")
         try:
             self.assertEqual (rp.tishi(), '登录成功', msg='登录失败')
+            rp.asdasda()
         except :
             Get_Screenshot(self.driver, '登录失败')
             raise
