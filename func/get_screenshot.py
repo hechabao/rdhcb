@@ -12,3 +12,4 @@ def Get_Screenshot(driver,filename):
     image_full_name = filepath + '/' + filename + time_stamp2 + '.png'
     driver.get_screenshot_as_file(image_full_name)
 
+

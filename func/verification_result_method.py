@@ -2,7 +2,6 @@
 
 
 def baogao(text):
-
     jianyi = []
     name = []
     shibai = 0

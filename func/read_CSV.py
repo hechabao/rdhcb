@@ -23,9 +23,24 @@ def read(filename):
     # 测试数据不包含第一行表头
     return list[1:]
 
+def Get_zhanghaohuoqu(filename):
+    base_path = os.path.dirname(__file__)
+    path = base_path.replace('func', 'data/' + 'account_package.csv')
+    # print(path)
+    with open(r'%s' % path, encoding='UTF-8') as content:
+        data = csv.reader(content)
+        # print(data)
+        for row in data:
+            # print(row)
+            if row[2] == filename:
+                return row[3],row[4]
+                break
+            # list.append(row)
+
+
 
 if __name__ == '__main__':
     # pass
-    list = read('geren-xingbie.csv')
-    print(list)
+    a,c = Get_zhanghaohuoqu('email')
+    print(a,c)
 

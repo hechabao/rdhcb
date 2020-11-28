@@ -39,3 +39,4 @@ def huoqu():
         print(maaaa)
     # print(html)
     return list
+huoqu()
