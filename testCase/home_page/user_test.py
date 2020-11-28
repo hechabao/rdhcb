@@ -138,7 +138,7 @@ class testyonghu(MyTestCase):
 
     @data(*xingbie)
     @unpack
-    def txst_xingbie(self, name, zhanghao, mimai, xingbie, names1, names2, names3, names4, names5, wenti, caoz):
+    def test_xingbie(self, name, zhanghao, mimai, xingbie, names1, names2, names3, names4, names5, wenti):
         """%s
 
         :return:
@@ -157,9 +157,9 @@ class testyonghu(MyTestCase):
             mylogger.info(names5)
             self.assertEqual(user_tests(self.driver).tishi(), '个人资料修改成功', msg=wenti)
             mylogger.info('保存交互正常')
-            print(user_tests(self.driver).nicheng_shuru_neirong(int(caoz)), xingbie)
+            print(user_tests(self.driver).nicheng_shuru_neirong(2), xingbie)
             try:
-                self.assertEqual(user_tests(self.driver).nicheng_shuru_neirong(int(caoz)), xingbie, msg='数据没有回显成功')
+                self.assertEqual(user_tests(self.driver).nicheng_shuru_neirong(2), xingbie, msg='数据没有回显成功')
                 mylogger.info('保存数据正常')
             except:
                 wenti = '数据保存失败'
@@ -171,7 +171,7 @@ class testyonghu(MyTestCase):
 
     @data(*gongsiname)
     @unpack
-    def txst_nicheng(self, name, zhanghao, mimai, neirong, names1, names2, names3, names4, names5, yuji, wenti):
+    def txst_nichengs(self, name, zhanghao, mimai, neirong, names1, names2, names3, names4, names5, yuji, wenti):
         """%s
 
         :return:
@@ -218,7 +218,7 @@ class testyonghu(MyTestCase):
 
     @data(*zhiyess)
     @unpack
-    def test_zhiwei(self, name, zhanghao, mimai, neirong, names1, names2, names3, names4, names5, yuji, wenti):
+    def txst_zhiwei(self, name, zhanghao, mimai, neirong, names1, names2, names3, names4, names5, yuji, wenti):
         """%s
 
         :return:
@@ -233,7 +233,7 @@ class testyonghu(MyTestCase):
         mylogger.info(names3)
         user_tests(self.driver).zhiweis(neirong)
         # user_tests(self.driver).gongsiname(neirong)
-        if names4 == '点保存':
+        if names4 == '保存':
             mylogger.info(names4)
             user_tests(self.driver).baocun()
             try:
@@ -295,7 +295,7 @@ class testyonghu(MyTestCase):
 
         :return:
         """
-        mylogger = Logger(logger='测试不修改内容点保存').getlog()
+        mylogger = Logger(logger='测试用户信息修改页点退出').getlog()
         mylogger.info("登录'sj17600446278@163.com','a123456'")
         test_Register_Page(self.driver).login('sj17600446278@163.com', 'a123456')
         mylogger.info("点修改用户信息")

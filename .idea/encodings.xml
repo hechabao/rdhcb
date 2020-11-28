@@ -3,6 +3,11 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/data/chongzhi.csv" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/data/chongzhi_wsxz.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/geren-gongsiname.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/geren-gzhiyess.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/geren-mingzi.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/geren-nicen.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/data/geren-weishuxianzhi.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/page_object/test_transfer_files_Page.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/testCase/home_page/Register_test.py" charset="UTF-8" />
   </component>

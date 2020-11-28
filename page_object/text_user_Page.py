@@ -156,15 +156,18 @@ class user_tests(BasePage):
         self.driver.find_element(*self.dianji_tuichu_loc).click()
     #     提示获取
     def tishi(self):
-        sleep(1)
+        sleep(0.3)
+        csdsdsd = 0
         while True:
+            csdsdsd+=1
             try:
                 # time.sleep(2)
                 nananan = self.driver.find_element(*self.baocuo_xingxi_loc).text.replace(" ", "")
                 return nananan
             except:
                 print('没有')
-
+                if csdsdsd == 3:
+                    raise "失败"
     def tuichuyanzheng(self):
         try:
             # time.sleep(2)
