@@ -3,6 +3,7 @@ import time
 import unittest2
 import sys
 from lib.HTMLTestRuner import HTMLTestRunner
+
 # print (__file__)
 # print (os.path.realpath(__file__))
 # print ('using sys.executable:', repr(os.path.dirname(os.path.realpath(sys.executable))))
@@ -21,5 +22,6 @@ if __name__ == '__main__':
     time_sign = time.strftime("%Y-%m-%d_%H-%M-%S")
     target_path = path + "/report/" + "测试报告" + time_sign + ".html"
     file = open(target_path, 'wb')
-    HTMLTestRunner(stream=file, verbosity=1, title="核查宝测试报告HTML", description="测试环境：win10、i7、8G、500G", tester="臧一凡").run(suite)
+    HTMLTestRunner(stream=file, verbosity=1, title="核查宝测试报告HTML", description="测试环境：win10、i7、8G、500G",
+                   tester="臧一凡").run(suite)
     file.close()

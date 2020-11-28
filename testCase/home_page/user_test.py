@@ -1,4 +1,4 @@
-from ddt import ddt,data,unpack,file_data
+from ddt import ddt, data, unpack, file_data
 import unittest2
 from time import sleep
 from func.feedback_method import weishu_shengchenqi
@@ -9,12 +9,15 @@ from page_object.text_user_Page import user_tests
 # from selenium import webdriver
 from func.read_CSV import read
 from func.log import Logger
+
 nichen = read('geren-nicen.csv')
 mingzi = read('geren-mingzi.csv')
 xingbie = read('geren-xingbie.csv')
 gongsiname = read('geren-gongsiname.csv')
 zhiyess = read('geren-gzhiyess.csv')
 weishuxianzhi = read('geren-weishuxianzhi.csv')
+
+
 @ddt
 class testyonghu(MyTestCase):
     def txst_baocun(self):
@@ -24,7 +27,7 @@ class testyonghu(MyTestCase):
         """
         mylogger = Logger(logger='测试不修改内容点保存').getlog()
         mylogger.info("登录'sj17600446278@163.com','a123456'")
-        test_Register_Page(self.driver).login('sj17600446278@163.com','a123456')
+        test_Register_Page(self.driver).login('sj17600446278@163.com', 'a123456')
         mylogger.info("点修改用户信息")
         user_tests(self.driver).user_jinglai()
         mylogger.info("点保存")
@@ -37,18 +40,17 @@ class testyonghu(MyTestCase):
             Get_Screenshot(self.driver, '不提示修改成功')
             raise
 
-
     @data(*nichen)
     @unpack
-    def txst_nicheng(self,name,zhanghao,mimai,neirong,names1,names2,names3,names4,names5,yuji,wenti):
+    def txst_nicheng(self, name, zhanghao, mimai, neirong, names1, names2, names3, names4, names5, yuji, wenti):
         """%s
 
         :return:
-        """%name
+        """ % name
         mylogger = Logger(logger=name).getlog()
         # '0-6'
         mylogger.info(names1)
-        test_Register_Page(self.driver).login(zhanghao,mimai)
+        test_Register_Page(self.driver).login(zhanghao, mimai)
         mylogger.info(names2)
         user_tests(self.driver).user_jinglai()
         mylogger.info(names3)
@@ -103,7 +105,7 @@ class testyonghu(MyTestCase):
             user_tests(self.driver).mingziqingkong()
         else:
             user_tests(self.driver).xiugai_user_name(neirong)
-        mylogger.info('输入内容'+neirong)
+        mylogger.info('输入内容' + neirong)
 
         if names4 == '点保存':
             mylogger.info(names4)
@@ -136,11 +138,11 @@ class testyonghu(MyTestCase):
 
     @data(*xingbie)
     @unpack
-    def txst_xingbie(self,name,zhanghao,mimai,xingbie,names1,names2,names3,names4,names5,wenti,caoz):
+    def txst_xingbie(self, name, zhanghao, mimai, xingbie, names1, names2, names3, names4, names5, wenti, caoz):
         """%s
 
         :return:
-        """% name
+        """ % name
         mylogger = Logger(logger=name).getlog()
         mylogger.info(names1)
         test_Register_Page(self.driver).login(zhanghao, mimai)
@@ -155,7 +157,7 @@ class testyonghu(MyTestCase):
             mylogger.info(names5)
             self.assertEqual(user_tests(self.driver).tishi(), '个人资料修改成功', msg=wenti)
             mylogger.info('保存交互正常')
-            print(user_tests(self.driver).nicheng_shuru_neirong(int(caoz)),xingbie)
+            print(user_tests(self.driver).nicheng_shuru_neirong(int(caoz)), xingbie)
             try:
                 self.assertEqual(user_tests(self.driver).nicheng_shuru_neirong(int(caoz)), xingbie, msg='数据没有回显成功')
                 mylogger.info('保存数据正常')
@@ -221,7 +223,7 @@ class testyonghu(MyTestCase):
 
         :return:
         """ % name
-        print(name,neirong)
+        print(name, neirong)
         mylogger = Logger(logger=name).getlog()
         # '0-6'
         mylogger.info(names1)
@@ -264,7 +266,8 @@ class testyonghu(MyTestCase):
 
     @data(*weishuxianzhi)
     @unpack
-    def txst_weishuxianzhia(self,name, zhanghao, mimai, weizhisssa, names1, names2, names3, names4, names5, yuji, wenti):
+    def txst_weishuxianzhia(self, name, zhanghao, mimai, weizhisssa, names1, names2, names3, names4, names5, yuji,
+                            wenti):
         """%s
 
         :return:
@@ -276,15 +279,17 @@ class testyonghu(MyTestCase):
         mylogger.info(names2)
         user_tests(self.driver).user_jinglai()
         mylogger.info(names3)
-        user_tests(self.driver).weishu(int(weizhisssa),weishu_shengchenqi(int(yuji)))
+        user_tests(self.driver).weishu(int(weizhisssa), weishu_shengchenqi(int(yuji)))
         mylogger.info(names4)
         try:
-            self.assertEqual(len(user_tests(self.driver).nicheng_shuru_neirong(int(weizhisssa))), int(yuji)-1, msg=wenti)
+            self.assertEqual(len(user_tests(self.driver).nicheng_shuru_neirong(int(weizhisssa))), int(yuji) - 1,
+                             msg=wenti)
             mylogger.info(names5)
         except:
             mylogger.info(wenti)
             Get_Screenshot(self.driver, wenti)
             raise
+
     def txst_tuichu(self):
         """测试用户信息修改页点退出
 
@@ -292,7 +297,7 @@ class testyonghu(MyTestCase):
         """
         mylogger = Logger(logger='测试不修改内容点保存').getlog()
         mylogger.info("登录'sj17600446278@163.com','a123456'")
-        test_Register_Page(self.driver).login('sj17600446278@163.com','a123456')
+        test_Register_Page(self.driver).login('sj17600446278@163.com', 'a123456')
         mylogger.info("点修改用户信息")
         user_tests(self.driver).user_jinglai()
         mylogger.info("点退出按钮")
@@ -306,8 +311,6 @@ class testyonghu(MyTestCase):
             Get_Screenshot(self.driver, '用户信息修改页不能退出首页')
             raise
 
+
 if __name__ == '__main__':
     unittest2.main()
-
-
-

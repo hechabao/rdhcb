@@ -6,10 +6,8 @@ import os
 import sys
 
 
-
 class Logger(object):
     def __init__(self, logger):
-
         # 创建一个logger
         self.logger = logging.getLogger(logger)
         self.logger.setLevel(logging.DEBUG)
@@ -19,7 +17,7 @@ class Logger(object):
         log_path = 'D:\\untitled5' + '\\Logs\\'
         # print(log_path)
         log_name = log_path + rq + '.log'
-        fh = logging.FileHandler(log_name,encoding='utf-8')
+        fh = logging.FileHandler(log_name, encoding='utf-8')
         fh.setLevel(logging.INFO)
 
         # 再创建一个handler，用于输出到控制台

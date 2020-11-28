@@ -10,6 +10,7 @@ import os
 # import selenium
 from base.basePage import BasePage
 from func.get_screenshot import Get_Screenshot
+
 '''
 D:\\2.1\\招股书-测试样本\\科创板\\奥基科技-科创板\\傲基科技：招股说明书 0828-0341.docx
 D:\\2.1\\招股书-测试样本\\科创板\\奥基科技-科创板\\2【傲基科技】法律意见书 20190827 clean.docx
@@ -30,6 +31,8 @@ class="main-create-project flex1"
 //a[text()="文本"]/following-sibling::a[1]
 
 '''
+
+
 # mylogger = Logger(logger='TestMyLog').getlog()
 # mylogger = Logger(logger='上传').getlog()
 # mylogger.info("打开浏览器")
@@ -40,7 +43,7 @@ class wenjian(BasePage):
     shangchuan_jindu_loc = (By.CLASS_NAME, 'el-progress__text')
     hecha_click_loc = (By.XPATH, "//span[text()='开始核查']")
     hecha_zhuangtai_loc = (By.XPATH, ("//div[@class='cell']/button"))
-    hecha_shuliang_loc = (By.XPATH,("//div[@class='fileList']"))
+    hecha_shuliang_loc = (By.XPATH, ("//div[@class='fileList']"))
     baocuo_xingxi_loc = (By.CLASS_NAME, "el-message__content")
     jiexixiangqing_xingxi_loc = (By.CLASS_NAME, ("el-dialog__body"))
     # jifen_huoqu_loc = (By.XPATH, ('//header[@class="el-header clearfix"]/div[@class="register clearfix"]/div/p/span'))placeholder="请输入核查人员"
@@ -49,7 +52,7 @@ class wenjian(BasePage):
     xuanzhe_gslx_name_loc = (By.XPATH, ("(//input[@class='el-input__inner'])[2]"))
     qiehuan_anniu_loc = (By.XPATH, ("//div[contains(@class,'meun-switch animated')]//img[1]"))
     gslys_all_loc = (By.XPATH, ('//span[text()="深圳证券交易所"]'))
-    hechayuan_shuru_loc = (By.XPATH,('//input[@placeholder="请输入核查人员"]'))
+    hechayuan_shuru_loc = (By.XPATH, ('//input[@placeholder="请输入核查人员"]'))
     jioayisuo_all_loc = (By.XPATH, ("//label[text()='交易所：']/following-sibling::div[1]/div/div/input"))
     rongzileixing_all_loc = (By.XPATH, ("//label[text()='融资类型：']/following-sibling::div[1]/div/div/input"))
     xiayibu_loc = (By.XPATH, ("//span[text()='下一步']"))
@@ -61,7 +64,8 @@ class wenjian(BasePage):
     putonghecha_kaishi = (By.XPATH, ("//button[contains(@class,'el-button zIndex199')]"))
     shuoqujingdu = (By.XPATH, ("(//div[@class='progress-box'])[1]"))
     guanbi_loc = (By.XPATH, ("//span[text()='关 闭']"))
-    def zhineng(self,name_url,name_shizi):
+
+    def zhineng(self, name_url, name_shizi):
         # time.sleep(2)el-progress__text(//div[@class='progress-box'])[1]//span[text()='关 闭']
         # self.jiexishibai()doc_file_list(//span[text()='点击上传'])[1]
         # name_url = ["D:\\2.1\\招股书-测试样本\\科创板\\奥基科技-科创板\\傲基科技：招股说明书 0828-0341.docx",
@@ -133,40 +137,38 @@ class wenjian(BasePage):
         # jieguo,jifen,jifens,results = self.hecha(2,mylogger)
         # print(jieguo,jifen,jifens,results)
 
+    def shurruxingxi(self, password, gslx, jiaoyi, rongzi, hechayuan=''):
+        time.sleep(1)
+        self.driver.find_element(*self.shuru_xiangmuname_loc).clear()
+        self.driver.find_element(*self.shuru_xiangmuname_loc).send_keys(password)
+        time.sleep(1)
+        self.driver.find_element(*self.xuanzhe_gslx_name_loc).click()
+        time.sleep(1)
+        gslx_all_loc = (By.XPATH, ("//span[text()='%s']" % gslx))
+        self.driver.find_element(*gslx_all_loc).click()
+        time.sleep(1)
+        self.driver.execute_script(
+            "document.getElementsByClassName('el-select-dropdown el-popper')[0].style.display='block';")
+        time.sleep(1)
+        gslx_all_loc = (By.XPATH, ("//span[text()='%s']" % jiaoyi))
+        self.driver.find_element(*gslx_all_loc).click()
+        self.driver.execute_script(
+            "document.getElementsByClassName('el-select-dropdown el-popper')[0].style.display='none';")
+        time.sleep(1)
+        self.driver.execute_script(
+            "document.getElementsByClassName('el-select-dropdown el-popper')[1].style.display='block';")
+        time.sleep(1)
+        gslx_all_loc = (By.XPATH, ("//span[text()='%s']" % rongzi))
+        self.driver.find_element(*gslx_all_loc).click()
+        self.driver.execute_script(
+            "document.getElementsByClassName('el-select-dropdown el-popper')[1].style.display='none';")
 
+        self.driver.find_element(*self.hechayuan_shuru_loc).clear()
+        self.driver.find_element(*self.hechayuan_shuru_loc).send_keys(hechayuan)
+        # print('完美')
+        time.sleep(1)
 
-    def shurruxingxi(self,password,gslx,jiaoyi,rongzi,hechayuan=''):
-            time.sleep(1)
-            self.driver.find_element(*self.shuru_xiangmuname_loc).clear()
-            self.driver.find_element(*self.shuru_xiangmuname_loc).send_keys(password)
-            time.sleep(1)
-            self.driver.find_element(*self.xuanzhe_gslx_name_loc).click()
-            time.sleep(1)
-            gslx_all_loc = (By.XPATH, ("//span[text()='%s']" % gslx))
-            self.driver.find_element(*gslx_all_loc).click()
-            time.sleep(1)
-            self.driver.execute_script("document.getElementsByClassName('el-select-dropdown el-popper')[0].style.display='block';")
-            time.sleep(1)
-            gslx_all_loc = (By.XPATH, ("//span[text()='%s']" % jiaoyi))
-            self.driver.find_element(*gslx_all_loc).click()
-            self.driver.execute_script(
-                "document.getElementsByClassName('el-select-dropdown el-popper')[0].style.display='none';")
-            time.sleep(1)
-            self.driver.execute_script(
-                "document.getElementsByClassName('el-select-dropdown el-popper')[1].style.display='block';")
-            time.sleep(1)
-            gslx_all_loc = (By.XPATH, ("//span[text()='%s']" % rongzi))
-            self.driver.find_element(*gslx_all_loc).click()
-            self.driver.execute_script(
-                "document.getElementsByClassName('el-select-dropdown el-popper')[1].style.display='none';")
-
-            self.driver.find_element(*self.hechayuan_shuru_loc).clear()
-            self.driver.find_element(*self.hechayuan_shuru_loc).send_keys(hechayuan)
-            # print('完美')
-            time.sleep(1)
-
-
-    def zhinengchuanshuju(self,xiangmuname,gslx,hechayuan):
+    def zhinengchuanshuju(self, xiangmuname, gslx, hechayuan):
         print(xiangmuname)
         time.sleep(2)
         self.driver.find_element(*self.shuru_xiangmuname_loc).clear()
@@ -186,9 +188,9 @@ class wenjian(BasePage):
         self.driver.find_element(*self.hechayuan_shuru_loc).clear()
         self.driver.find_element(*self.hechayuan_shuru_loc).send_keys(hechayuan)
 
-
         # return self.driver
-    def hecha(self,a,mylogger):
+
+    def hecha(self, a, mylogger):
         mylogger.info("获取现有积分")
         jifen = self.driver.find_element(*self.jifen_huoqu_loc).text[5:]
         time.sleep(1)
@@ -207,18 +209,20 @@ class wenjian(BasePage):
                 jieguo, jifens = self.jiexishibai()
                 results = '成功'
                 break
-            elif result.replace(" ","") == "解析失败":
+            elif result.replace(" ", "") == "解析失败":
                 jieguo, jifens = self.jiexishibai()
                 results = '失败'
 
                 break
-        mylogger.info("结果%s"%jieguo)
-        return jieguo,jifen,jifens,results
+        mylogger.info("结果%s" % jieguo)
+        return jieguo, jifen, jifens, results
+
     def jifenhuoqu(self):
         self.driver.refresh()
         time.sleep(0.7)
         jifen = self.driver.find_element(*self.jifen_huoqu_loc).text[5:]
         return jifen
+
     def jiexishibai(self):
         jifens = self.jifenhuoqu()
         self.driver.find_element(*self.hecha_zhuangtai_loc).click()
@@ -230,7 +234,7 @@ class wenjian(BasePage):
         jieguo = baogao(jieguo)
         time.sleep(0.5)
         self.driver.find_element(*self.guanbi_loc).click()
-        return jieguo,jifens
+        return jieguo, jifens
 
     def jiexichenggong(self):
         jifens = self.jifenhuoqu()
@@ -245,6 +249,7 @@ class wenjian(BasePage):
         self.driver.find_element(*self.guanbi_loc).click()
         time.sleep(5)
         return jieguo, jifens
+
     def tishi(self):
         while True:
             try:
@@ -255,11 +260,12 @@ class wenjian(BasePage):
                 print('没有')
         # a = self.tishi()
         # print(a)
-    def putong(self,name_url):
+
+    def putong(self, name_url):
         mylogger = Logger(logger='普通上传').getlog()
         time.sleep(4)
         self.driver.find_element(*self.qiehuan_anniu_loc).click()
-        self.shurruxingxi(name_url[1][0],name_url[1][1],name_url[1][2],name_url[1][3],name_url[1][4])
+        self.shurruxingxi(name_url[1][0], name_url[1][1], name_url[1][2], name_url[1][3], name_url[1][4])
         self.driver.find_element(*self.xiayibu_loc).click()
         # gongzhuanshu_locself.driver.find_element(*self.wenjianhsnagchuan_loc).send_keys("D:\\2.1\\招股书-测试样本\\科创板\\奥基科技-科创板\\傲基科技：招股说明书 0828-0341.docx")
         # self.driver.find_element(*self.gongzhuanshu_loc).click()
@@ -267,7 +273,7 @@ class wenjian(BasePage):
             for j in range(len(name_url[0][i])):
                 print(name_url[0][i][j])
                 if j != 0:
-                    shangchuan_2_loc = (By.XPATH, ("(//span[text()='点击上传'])[%s]"%str(i+1)))
+                    shangchuan_2_loc = (By.XPATH, ("(//span[text()='点击上传'])[%s]" % str(i + 1)))
                     self.driver.find_element(*shangchuan_2_loc).click()
                 else:
                     time.sleep(1)
@@ -282,10 +288,8 @@ class wenjian(BasePage):
 
         # self.driver.find_element(*self.putonghecha_kaishi).click()
         # print(self.driver.find_element(*self.pt_1_shuliang_loc).text)
-        jieguo, jifen, jifens, results = self.hecha(1,mylogger)
+        jieguo, jifen, jifens, results = self.hecha(1, mylogger)
         print(jieguo, jifen, jifens, results)
-
 
     def shanchu_wenjian(self):
         pass
-

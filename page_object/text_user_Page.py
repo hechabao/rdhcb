@@ -7,7 +7,22 @@ import os
 from base.basePage import BasePage
 from func.get_screenshot import Get_Screenshot
 from func.log import Logger
-
+'''
+(//div[@class='register clearfix']//div)[2]
+//span[text()='修改个人资料']
+(//input[@class='el-input__inner'])[1]
+(//input[@class='el-input__inner'])[2]
+(//input[@class='el-input__inner'])[3]
+html[1]/body[1]/div[3]/div[1]/div[1]/ul[1]/li[1]
+html[1]/body[1]/div[3]/div[1]/div[1]/ul[1]/li[2]
+(//input[@class='el-input__inner'])[4]
+(//input[@class='el-input__inner'])[5]
+(//input[@value-key='project_name'])[5]
+(//input[@placeholder='请选择'])[2]
+header#head-top>header>span
+tab-password
+(//input[@type='password'])[1]
+'''
 class user_tests(BasePage):
     dianji_1_loc = (By.XPATH,("(//div[@class='register clearfix']//div)[2]"))
     dianji_2_loc = (By.XPATH,("//span[text()='修改个人资料']"))
