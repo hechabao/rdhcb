@@ -89,6 +89,9 @@ class test_Register_Page(BasePage):
     def wangjimima(self):
         self.driver.find_element(*self.yonghuzuce).click()
         return self.driver.current_url
+    def asdasda(self):
+        html = self.driver.execute_script("return document.documentElement.outerHTML")
+        print(html)
 
     #点击忘记密码按钮获取跳转链接
     def yonghuzhuce(self):
