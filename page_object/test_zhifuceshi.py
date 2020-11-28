@@ -40,11 +40,10 @@ WebElement  = driver.findElement(By.xpath("//input[@placeholder='请输入手机
 placeholder
 document.getElementsByClassName('span45')[0].value
 '''
-
-
 class zhifu_tests(BasePage):
+
     jinru_1_loc = (By.XPATH, "(//div[@class='register clearfix']//div)[1]")
-    jinru_2_loc = (By.XPATH, "(//section[@class='head-tab-item'])[3]")
+    jinru_2_loc = (By.XPATH,"(//section[@class='head-tab-item'])[3]")
     zhanhao_kuang = "return document.getElementsByClassName('span45')[0].value"
     jifen_kuang_huoqu = "return document.getElementsByClassName('span20')[0].value"
     jifen_kuang = (By.XPATH, "(//input[@class='span20'])[1]")
@@ -54,7 +53,7 @@ class zhifu_tests(BasePage):
     jiner_tishi = (By.XPATH, "(//span[@class='desr'])[2]")
     zhifu_fangshi_kuang = (By.XPATH, "(//div[@class='content']//img)[4]")
     ptfp_goxuan_kuang = (By.ID, 'no1')
-    zzfp_goxuan_kuang = (By.ID, 'no2')
+    zzfp_goxuan_kuang = (By.ID,'no2')
     queding_kuang = (By.XPATH, "//button[@class='combtn submit']")
     fanhui_annniu = (By.XPATH, "//button[@class='combtn reset']")
     baocuo_xingxi_loc = (By.CLASS_NAME, "el-message__content")
@@ -71,7 +70,6 @@ class zhifu_tests(BasePage):
     zhanhao_kuangs3 = "return document.getElementsByClassName('span25')[3].value"
     zhanhao_kuangsss0 = "return document.getElementsByClassName('span20')[0].value"
     zhanhao_kuangsss1 = "return document.getElementsByClassName('span15')[0].value"
-
     # 进入积分充值
     def jinruf(self):
         sleep(0.5)
@@ -96,8 +94,8 @@ class zhifu_tests(BasePage):
             return '没'
 
     # 积分框输入
-    def jifen_chongzhif(self, neirong):
-        self.qaingchu(self.jifen_kuang, 16)
+    def jifen_chongzhif(self,neirong):
+        self.qaingchu(self.jifen_kuang,16)
         self.driver.find_element(*self.jifen_kuang).send_keys(neirong)
 
     # 积分输入框内容获取返回
@@ -112,7 +110,7 @@ class zhifu_tests(BasePage):
 
     # 金额框输入
     def jiner_chongzhif(self, neirong):
-        self.qaingchu(self.jiner_kuang, 16)
+        self.qaingchu(self.jiner_kuang,16)
         self.driver.find_element(*self.jiner_kuang).send_keys(neirong)
 
     # 金额输入框内容获取返回
@@ -138,20 +136,16 @@ class zhifu_tests(BasePage):
     # 勾选增值税发票
     def go_xuan_zzfapiao(self):
         self.driver.find_element(*self.zzfp_goxuan_kuang).click()
-
     # 点确定
     def dian_queding(self):
         self.driver.find_element(*self.queding_kuang).click()
-
     # 获取确定键内容
     def huoquq_queding(self):
         n = self.driver.find_element(*self.queding_kuang).text
         return n
-
     # 点返回
     def dian_fanhui(self):
         self.driver.find_element(*self.fanhui_annniu).click()
-
     # 二级位置
     def caozuo_weizhisss(self, weihzi):
         if weihzi == '公司名':
@@ -184,9 +178,8 @@ class zhifu_tests(BasePage):
         elif weihzi == '账户':
             a = self.driver.execute_script(self.zhanhao_kuang3)
             return a
-
     # 二级位置
-    def caozuo_weizhi(self, weihzi):
+    def caozuo_weizhi(self,weihzi):
         if weihzi == '公司名':
             a = self.driver.execute_script(self.zhanhao_kuang0)
             return a
@@ -206,40 +199,39 @@ class zhifu_tests(BasePage):
             a = self.driver.execute_script(self.zhanhao_kuangs1)
             return a
 
-    def fanhui_pn(self, neirong):
-        namesss = "//input[@placeholder='%s']" % neirong
+
+    def fanhui_pn(self,neirong):
+        namesss = "//input[@placeholder='%s']"%neirong
         self.driver.find_URL_elements()
         # print(namesss)
         return namesss
 
     # 框输入
-    def wanneng_chongzhif(self, neirong, name):
+    def wanneng_chongzhif(self, neirong,name):
         sleep(1)
         # print('zjap')
         self.driver.find_element(*(By.XPATH, (self.fanhui_pn(neirong)))).send_keys(name)
-
     def kuang_huoqu(self, neirong):
-        a = self.driver.find_element(*(By.XPATH, (self.fanhui_pn(neirong)))).text
+        a =  self.driver.find_element(*(By.XPATH, (self.fanhui_pn(neirong)))).text
         return a
-
     # 一级位置
     def dian_weizhi(self, weihzi, names, nsss):
         if weihzi == '积分充值':
-            self.wanneng_chongzhif(neirong=names, name=nsss)
+            self.wanneng_chongzhif(neirong=names,name=nsss)
         elif weihzi == '普通发票':
             self.go_xuan_ptfapiao()
             sleep(1)
             self.dian_queding()
             sleep(1)
-            self.wanneng_chongzhif(neirong=names, name=nsss)
+            self.wanneng_chongzhif(neirong=names,name=nsss)
         elif weihzi == '增值税发票':
             self.go_xuan_zzfapiao()
             self.dian_queding()
-            self.wanneng_chongzhif(neirong=names, name=nsss)
+            self.wanneng_chongzhif(neirong=names,name=nsss)
 
     # 获取
     def huoqu_dian_weizhi(self, weihzi, name):
-        print(weihzi, name)
+        print(weihzi,name)
         if weihzi == '积分充值':
             return self.kuang_huoqu(neirong=name)
         elif weihzi == '普通发票':
