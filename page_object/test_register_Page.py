@@ -19,6 +19,7 @@ class test_Register_Page(BasePage):
     wangjimimas=(By.XPATH,"//div[text()='用户注册']")#用户注册按钮
     shenji_baduan_zhidao_anniu = (By.XPATH,"//span[text()[normalize-space()='我知道了']]")#活动提示框等待5秒后的我知道了按钮
     login_btu_loc = (By.CSS_SELECTOR,"div#app>div>div:nth-of-type(3)>div>span")
+    shoye_shenbaohecha_loc = (By.XPATH, ("(//div[@class='content'])[2]"))
     # 打开页面
     def open(self):
         self.url = self.base_url + self.url
@@ -56,6 +57,10 @@ class test_Register_Page(BasePage):
         time.sleep(1)
         n = self.driver.find_element(*self.baocuo).text
         return n
+
+    # 首页选择申报核查
+    def click_shenbaohecha(self):
+        self.driver.find_element(*self.shoye_shenbaohecha_loc).click()
 
     #升级通告时点击知道按钮
     def shengji_panduan(self):

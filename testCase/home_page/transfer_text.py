@@ -21,12 +21,9 @@ class test_cwj(MyTestCase):
     @unpack
     def test_chuanwenjians(self, i, n):
         print(i, n)
-        # lste = [["D:\\2.1版本\\1-1招股说明书（申报稿）.docx","D:\\2.1版本\\事业五部-大华审字[2017]002795号-爱美客技术发展股份有限公司-4+1份.doc","D:\\2.1版本\\事业五部-大华审字[2017]002795号-爱美客技术发展股份有限公司报表-4+1份.xls"],['爱美客','银行','admin']]
-        # name_url = [[["D:\\2.1版本\\1-1招股说明书（申报稿）.docx"],
-        #             ["D:\\2.1版本\\事业五部-大华审字[2017]002795号-爱美客技术发展股份有限公司-4+1份.doc"],
-        #             ["D:\\2.1版本\\事业五部-大华审字[2017]002795号-爱美客技术发展股份有限公司报表-4+1份.xls"]],['爱美客','银行','深圳证券交易所','新三板挂牌','admin']]
         rp = test_Register_Page(self.driver)
         rp.login('hcb@test.com', 'hcb123')
+        rp.click_shenbaohecha()
         zhinenga = wenjian(self.driver)
         zhinenga.zhineng(i, n)
         # zhinenga.putong(name_url)

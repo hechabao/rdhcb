@@ -38,6 +38,7 @@ class testyonghu(MyTestCase):
             self.assertEqual(user_tests(self.driver).tishi(), '个人资料修改成功', msg='不提示修改成功')
         except:
             Get_Screenshot(self.driver, '不提示修改成功')
+            mylogger.info("用例执行失败已截图")
             raise
 
     @data(*nichen)
@@ -75,6 +76,7 @@ class testyonghu(MyTestCase):
             except:
                 mylogger.info(wenti)
                 Get_Screenshot(self.driver, wenti)
+                mylogger.info("用例执行失败已截图")
                 raise
         else:
             try:
@@ -85,6 +87,7 @@ class testyonghu(MyTestCase):
             except:
                 mylogger.info(wenti)
                 Get_Screenshot(self.driver, wenti)
+                mylogger.info("用例执行失败已截图")
                 raise
 
     @data(*mingzi)
@@ -125,6 +128,7 @@ class testyonghu(MyTestCase):
             except:
                 mylogger.info(wenti)
                 Get_Screenshot(self.driver, wenti)
+                mylogger.info("用例执行失败已截图")
                 raise
         else:
             try:
@@ -134,6 +138,7 @@ class testyonghu(MyTestCase):
             except:
                 mylogger.info(wenti)
                 Get_Screenshot(self.driver, wenti)
+                mylogger.info("用例执行失败已截图")
                 raise
 
     @data(*xingbie)
@@ -167,6 +172,7 @@ class testyonghu(MyTestCase):
         except:
             mylogger.info(wenti)
             Get_Screenshot(self.driver, wenti)
+            mylogger.info("用例执行失败已截图")
             raise
 
     @data(*gongsiname)
@@ -204,6 +210,7 @@ class testyonghu(MyTestCase):
             except:
                 mylogger.info(wenti)
                 Get_Screenshot(self.driver, wenti)
+                mylogger.info("用例执行失败已截图")
                 raise
         else:
             mylogger.info(names4)
@@ -214,6 +221,7 @@ class testyonghu(MyTestCase):
             except:
                 mylogger.info(wenti)
                 Get_Screenshot(self.driver, wenti)
+                mylogger.info("用例执行失败已截图")
                 raise
 
     @data(*zhiyess)
@@ -251,6 +259,7 @@ class testyonghu(MyTestCase):
             except:
                 mylogger.info(wenti)
                 Get_Screenshot(self.driver, wenti)
+                mylogger.info("用例执行失败已截图")
                 raise
         else:
             mylogger.info(names4)
@@ -262,6 +271,7 @@ class testyonghu(MyTestCase):
             except:
                 mylogger.info(wenti)
                 Get_Screenshot(self.driver, wenti)
+                mylogger.info("用例执行失败已截图")
                 raise
 
     @data(*weishuxianzhi)
@@ -288,6 +298,7 @@ class testyonghu(MyTestCase):
         except:
             mylogger.info(wenti)
             Get_Screenshot(self.driver, wenti)
+            mylogger.info("用例执行失败已截图")
             raise
 
     def txst_tuichu(self):
@@ -309,6 +320,7 @@ class testyonghu(MyTestCase):
             mylogger.info("退出成功")
         except:
             Get_Screenshot(self.driver, '用户信息修改页不能退出首页')
+            mylogger.info("用例执行失败已截图")
             raise
 
 

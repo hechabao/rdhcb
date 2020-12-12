@@ -15,7 +15,7 @@ class Logger(object):
         # 创建一个handler，用于写入日志文件
         rq = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
         log_path = 'D:\\untitled5' + '\\Logs\\'
-        # print(log_path)
+        print(log_path)
         log_name = log_path + rq + '.log'
         fh = logging.FileHandler(log_name, encoding='utf-8')
         fh.setLevel(logging.INFO)
@@ -35,7 +35,7 @@ class Logger(object):
 
     def getlog(self):
         return self.logger
-# mylogger = Logger(logger='上传').getlog()
-# mylogger.info("打开浏览器")
+mylogger = Logger(logger='上传').getlog()
+mylogger.info("打开浏览器")
 # mylogger = Logger(logger='下载').getlog()
 # mylogger.info("打开水水水水水浏览器")

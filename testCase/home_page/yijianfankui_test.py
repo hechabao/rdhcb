@@ -52,6 +52,7 @@ class testyonghu(MyTestCase):
         except:
             mylogger.info(shibai)
             Get_Screenshot(self.driver, yuqi)
+            mylogger.info("用例执行失败已截图")
             raise
 
     @data(*hui_xian_zhanghao)
@@ -75,6 +76,7 @@ class testyonghu(MyTestCase):
         except:
             mylogger.info(cuowu)
             Get_Screenshot(self.driver, cuowu)
+            mylogger.info("用例执行失败已截图")
             raise
 
     @data(*bi_tian_xiang)
@@ -102,6 +104,7 @@ class testyonghu(MyTestCase):
         except:
             mylogger.info(cuowu)
             Get_Screenshot(self.driver, cuowu)
+            mylogger.info("用例执行失败已截图")
             raise
 
     @data(*xuan_ze_kuang_ceshi)
@@ -119,8 +122,8 @@ class testyonghu(MyTestCase):
         mylogger.info(name2)
         yijianss_tests(self.driver).user_jinglai()
         mylogger.info(name3)
-        yijianss_tests(self.driver).panduanweizhi('哇哇哇', '机构名称', '输入', zhanghaolx)
-        yijianss_tests(self.driver).panduanweizhi('哇哇哇', '联系人', '输入', zhanghaolx)
+        yijianss_tests(self.driver).panduanweizhi(weishu_shengchenqi(4), '机构名称', '输入', zhanghaolx)
+        yijianss_tests(self.driver).panduanweizhi(weishu_shengchenqi(4), '联系人', '输入', zhanghaolx)
         mylogger.info(name4)
         yijianss_tests(self.driver).panduanweizhi(shuju, leix, '无', '无')
         sleep(5)
@@ -144,10 +147,11 @@ class testyonghu(MyTestCase):
         except:
             mylogger.info(cuowu)
             Get_Screenshot(self.driver, cuowu)
+            mylogger.info("用例执行失败已截图")
             raise
 
     def test_tuichu(self):
-        """测试用户信息修改页点退出
+        """测试意见反馈页退出按钮
 
         :return:
         """
@@ -165,6 +169,7 @@ class testyonghu(MyTestCase):
             mylogger.info("退出成功")
         except:
             Get_Screenshot(self.driver, '用户信息修改页不能退出首页')
+            mylogger.info("用例执行失败已截图")
             raise
 
 

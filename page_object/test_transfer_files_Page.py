@@ -10,6 +10,7 @@ import os
 # import selenium
 from base.basePage import BasePage
 from func.get_screenshot import Get_Screenshot
+from selenium.webdriver.common.action_chains import ActionChains
 
 '''
 D:\\2.1\\招股书-测试样本\\科创板\\奥基科技-科创板\\傲基科技：招股说明书 0828-0341.docx
@@ -39,7 +40,7 @@ class="main-create-project flex1"
 class wenjian(BasePage):
     # self.driver.find_element(*self.qiehuan_anniu_loc).click()    智能上传和普通上传切换代码
     shangchuan_loc = (By.XPATH, (
-        "/html/body/div[@id='app']/div[@id='home']/div[@class='content']/div[@class='main source']/div[@class='main-create flex-row']/div[@class='main-create-upload']/div[@class='content']/div[@class='center']/div[@class='upload flex-row3']/div[@class='elUpload flex1']/div[@class='upload-demo flex-col']/div[@class='el-upload el-upload--text']/div[@class='el-upload-dragger']"))
+        "(//button[@class='el-button el-button--primary'])[1]"))
     shangchuan_jindu_loc = (By.CLASS_NAME, 'el-progress__text')
     hecha_click_loc = (By.XPATH, "//span[text()='开始核查']")
     hecha_zhuangtai_loc = (By.XPATH, ("//div[@class='cell']/button"))
@@ -49,7 +50,7 @@ class wenjian(BasePage):
     # jifen_huoqu_loc = (By.XPATH, ('//header[@class="el-header clearfix"]/div[@class="register clearfix"]/div/p/span'))placeholder="请输入核查人员"
     jifen_huoqu_loc = (By.XPATH, ('//p[@class="tag jifen"]/span'))
     shuru_xiangmuname_loc = (By.XPATH, ('//input[@placeholder="请输入项目名称"]'))
-    xuanzhe_gslx_name_loc = (By.XPATH, ("(//input[@class='el-input__inner'])[2]"))
+    xuanzhe_gslx_name_loc = (By.CSS_SELECTOR, ("div#scroll>div>div:nth-of-type(2)>div>div>div>div>div>div:nth-of-type(2)>form>div:nth-of-type(2)>div>div>div>div>div>span>span>i"))
     qiehuan_anniu_loc = (By.XPATH, ("//div[contains(@class,'meun-switch animated')]//img[1]"))
     gslys_all_loc = (By.XPATH, ('//span[text()="深圳证券交易所"]'))
     hechayuan_shuru_loc = (By.XPATH, ('//input[@placeholder="请输入核查人员"]'))
@@ -64,52 +65,34 @@ class wenjian(BasePage):
     putonghecha_kaishi = (By.XPATH, ("//button[contains(@class,'el-button zIndex199')]"))
     shuoqujingdu = (By.XPATH, ("(//div[@class='progress-box'])[1]"))
     guanbi_loc = (By.XPATH, ("//span[text()='关 闭']"))
-
+    # 文件全选框
+    wenjian_quanxuan_kuang = (By.XPATH, ("//div[@id='scroll']/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/label[1]/span[1]/span[1]"))
+    # 上传文件全选框旁删除按钮
+    wenjian_shanchu_click = (By.LINK_TEXT, ("删除"))
+    # 以上传文件个数
+    shangchuan_cisshu = 0
     def zhineng(self, name_url, name_shizi):
-        # time.sleep(2)el-progress__text(//div[@class='progress-box'])[1]//span[text()='关 闭']
-        # self.jiexishibai()doc_file_list(//span[text()='点击上传'])[1]
-        # name_url = ["D:\\2.1\\招股书-测试样本\\科创板\\奥基科技-科创板\\傲基科技：招股说明书 0828-0341.docx",
-        #             "D:\\2.1\\招股书-测试样本\\科创板\\奥基科技-科创板\\2【傲基科技】法律意见书 20190827 clean.docx",
-        #             "D:\\2.1\\招股书-测试样本\\科创板\\奥基科技-科创板\\深圳分所：大华审字(2019)009872号傲基科技股份有限公司5+1份-数字.xlsx"]
-        # el-message__content表单必选项不得漏填!
-        # time.sleep(2)
-        # self.driver.find_element(*self.shangchuan_loc).click()
-        # while True:
-        #     try:
-        #         # time.sleep(2)
-        #         nananan = self.driver.find_element(*self.baocuo_xingxi_loc).text.replace(" ", "")
-        #         print(nananan)
-        #         if nananan == "表单必选项不得漏填!":
-        #             Get_Screenshot(self.driver, '登录异常用例')
-        #             break
-        #     except:
-        #         print('没有')
         mylogger = Logger(logger='智能上传').getlog()
         time.sleep(1)
-        # self.zhinengchuanshuju('臧一凡','银行','admin')************************
-        # self.shurruxingxi('臧一凡','银行','深圳证券交易所','新三板挂牌','admin')*******************************
-        # self.driver.find_element(*self.qiehuan_anniu_loc).click()
-        # time.sleep(2)
-        # self.driver.find_element(*self.qiehuan_anniu_loc).click()
-        mylogger.info("判断如果已存在文件则跳过信息填写")
-        n = 1
+        mylogger.info("信息填写")
+        # 如果资料填写失败，认为存在未上传文件，进行全选删除
         try:
-            resultsss = len(self.driver.find_element(*self.hecha_shuliang_loc).text.split(' 上传成功\n'))
-        except:
             self.zhinengchuanshuju(name_shizi[0], name_shizi[1], name_shizi[2])
-        time.sleep(1)
-
+        except:
+            self.driver.find_element(*self.wenjian_quanxuan_kuang).click()
+            self.driver.find_element(*self.wenjian_shanchu_click).click()
         for i in name_url:
             print(i)
-
-            try:
-                resultsss = len(self.driver.find_element(*self.hecha_shuliang_loc).text.split(' 上传成功\n'))
-            except:
-                resultsss = 0
-            time.sleep(0.5)
+            time.sleep(2)
+            # try:
+            #     resultsss = len(self.driver.find_element(*self.hecha_shuliang_loc).text.split(' 上传成功\n')[0].split('上传成功'))-1#获取上传列表个数
+            # except:
+            #     resultsss = 0
+            # print(resultsss)
+            # time.sleep(5)
             mylogger.info("点击上传")
             self.driver.find_element(*self.shangchuan_loc).click()
-            print(resultsss)
+            # print(a[0].split('上传成功\\n'))
             time.sleep(0.5)
             mylogger.info("上传文件%s" % i)
             os.system(r'D:\2.1\shangchuan.exe %s' % i)
@@ -118,16 +101,19 @@ class wenjian(BasePage):
             while True:
                 try:
                     result = self.driver.find_element(*self.shangchuan_jindu_loc).text
-                    # print(result)
+                    print(result)
                     if result == '100%':
                         mylogger.info("100%成功")
-                        # print('完成')
+                        # print('完成')“”
+                        a = ''.format()
+                        self.shangchuan_cisshu += 1
                         break
                 except:
                     print('-----------------')
-                    resultss = len(self.driver.find_element(*self.hecha_shuliang_loc).text.split(' 上传成功\n'))
-                    if resultsss + 1 == resultss:
+                    resultss = len(self.driver.find_element(*self.hecha_shuliang_loc).text.split(' 上传成功\n')[0].split('上传成功'))-1
+                    if self.shangchuan_cisshu + 1 == resultss:
                         # print('成功')
+                        self.shangchuan_cisshu+=1
                         mylogger.info("100%成功")
                         break
                     else:
@@ -170,21 +156,24 @@ class wenjian(BasePage):
 
     def zhinengchuanshuju(self, xiangmuname, gslx, hechayuan):
         print(xiangmuname)
-        time.sleep(2)
+        time.sleep(0.5)
         self.driver.find_element(*self.shuru_xiangmuname_loc).clear()
         self.driver.find_element(*self.shuru_xiangmuname_loc).send_keys(xiangmuname)
-        print(self.driver.find_element(*self.shuru_xiangmuname_loc).get_attribute('name'))
-        time.sleep(2)
-
+        # print(self.driver.find_element(*self.shuru_xiangmuname_loc).get_attribute('name'))
+        time.sleep(0.5)
+        # 悬停使信息填写盒子激活可操作
+        kaishiba = self.driver.find_element(*self.xuanzhe_gslx_name_loc)
+        ActionChains(self.driver).move_to_element(kaishiba).perform()
+        # 点击公司类型下卡框
         self.driver.find_element(*self.xuanzhe_gslx_name_loc).click()
-        time.sleep(2)
+        time.sleep(0.6)
         self.driver.execute_script(
             "document.getElementsByClassName('el-select-dropdown el-popper')[1].style.display='block';")
         gslx_all_loc = (By.XPATH, ("//span[text()='%s']" % gslx))
         self.driver.find_element(*gslx_all_loc).click()
         self.driver.execute_script(
             "document.getElementsByClassName('el-select-dropdown el-popper')[1].style.display='none';")
-        time.sleep(2)
+        time.sleep(0.5)
         self.driver.find_element(*self.hechayuan_shuru_loc).clear()
         self.driver.find_element(*self.hechayuan_shuru_loc).send_keys(hechayuan)
 

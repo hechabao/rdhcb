@@ -31,9 +31,10 @@ class testzhifu(MyTestCase):
             self.assertEqual(zhifu_tests(self.driver).zhanghao_huoquf(), '有', msg='账号框里无内容')
         except:
             Get_Screenshot(self.driver, '账号框里无内容')
+            mylogger.info("用例执行失败已截图")
             raise
 
-    def text_weishu_dian_queding(self):
+    def test_weishu_dian_queding(self):
         """测试提示未输入充值积分
 
         :return:
@@ -44,14 +45,17 @@ class testzhifu(MyTestCase):
         mylogger.info("进入积分充值")
         zhifu_tests(self.driver).jinruf()
         mylogger.info("点确定")
-
+        sleep(1)
         zhifu_tests(self.driver).dian_queding()
         mylogger.info("判断提示")
         try:
 
-            self.assertEqual(zhifu_tests(self.driver).tishi(), '您还未输入充值积分', msg='未提示未输入充值积分')
+            self.assertEqual(zhifu_tests(self.driver).tishi(), '您还未输入充值积分1', msg='未提示未输入充值积分')
+            mylogger.info("成功")
         except:
+            # mylogger.info("用例执行失败已截图")
             Get_Screenshot(self.driver, '未提示未输入充值积分')
+            mylogger.info("用例执行失败已截图")
             raise
 
     @data(*chongzhi_wsxz)
@@ -81,6 +85,7 @@ class testzhifu(MyTestCase):
         except:
             mylogger.info(wenti)
             Get_Screenshot(self.driver, wenti)
+            mylogger.info("用例执行失败已截图")
             raise
 
 
